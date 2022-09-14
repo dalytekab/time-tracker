@@ -10,7 +10,7 @@ import { TimersModule } from './timers/timers.module';
 @Module({
   imports: [
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'timetracker-frontend/dist'), 
+      rootPath: join(__dirname, '..', 'fo_client/dist'), 
     }),
     TimersModule//,
     ///PrismaModule, TimerModule

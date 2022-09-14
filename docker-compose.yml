@@ -12,7 +12,10 @@ services:
       - ./pgdata:/var/lib/postgresql/data
 
   web:
-    image: daly/web:1
+    #image: daly/web:2
+    build: 
+      args:
+        API: $$(gp url 8080)
     depends_on:
       - db
     ports:
