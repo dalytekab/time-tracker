@@ -15,40 +15,40 @@
           >
         </div>
   </section>
-      <section class="tab_sec">
-        <table>
-          <tbody>
-            <tr v-if="isCurrent==true" >              
-              <TimerRow ref="courant" :total-hours="0" :total-minutes="0" :total-seconds="0" :estTimer="true" :startTime="this.startFormated"></TimerRow>
-            </tr>
-            <tr v-for="(item, index) in items" :key="index">              
-              <TimerRow :total-hours=item.h :total-minutes=item.m :total-seconds=item.s :id=item.id :startTime=item.startTime.slice(11,-8) :endTime=item.endTime.slice(11,-8)></TimerRow>
-            </tr>
-          
-          </tbody>
-          <tfoot class="footer" v-if="items.length>0">
-            <tr style="border: none">
-              <td style="padding:1.5rem"></td>
-              <td style="padding:1.5rem">
-                <span
-                  style="
-                    font-weight: 900;
-                    color: #6a7480;
-                    font-size: 25px;
-                    margin-left: 3rem;
-                  "
-                  >Total</span
-                >
-              </td>
-              <td style="padding:1.5rem">
-                <div class="footer_total" >
-                  <span style="font-weight: 900">{{totalHours}}:{{totalMinutes}}</span>:{{totalSeconds}}
-                </div>
-              </td>
-            </tr>
-          </tfoot>
-        </table>
-      </section>
+  <section class="tab_sec">
+    <table>
+      <tbody>
+        <tr v-if="isCurrent==true" >              
+          <TimerRow ref="courant" :total-hours="0" :total-minutes="0" :total-seconds="0" :estTimer="true" :startTime="this.startFormated"></TimerRow>
+        </tr>
+        <tr v-for="(item, index) in items" :key="index">              
+          <TimerRow :total-hours=item.h :total-minutes=item.m :total-seconds=item.s :id=item.id :startTime=item.startTime.slice(11,-8) :endTime=item.endTime.slice(11,-8)></TimerRow>
+        </tr>
+      
+      </tbody>
+      <tfoot class="footer" v-if="items.length>0">
+        <tr style="border: none">
+          <td style="padding:1.5rem"></td>
+          <td style="padding:1.5rem">
+            <span
+              style="
+                font-weight: 900;
+                color: #6a7480;
+                font-size: 25px;
+                margin-left: 3rem;
+              "
+              >Total</span
+            >
+          </td>
+          <td style="padding:1.5rem">
+            <div class="footer_total" >
+              <span style="font-weight: 900">{{totalHours}}:{{totalMinutes}}</span>:{{totalSeconds}}
+            </div>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </section>
 </template>
 
 <script>
@@ -82,7 +82,7 @@ beforeMount(){
 },
 methods: {
   async getData(){
-  let res = await axios.get('http://localhost:3000/api/timers')
+  let res = await axios.get('https://8080-dalyhachich-timetracker-0hek2vxdhl9.ws-eu64.gitpod.io/api/timers')
   let data = res.data
   data.forEach(element => {
     
@@ -123,7 +123,7 @@ arreter()
   {
     this.$refs.courant.pause();
     this.end=new Date();
-    axios.post('http://localhost:3000/api/timers',{startTime:this.start,endTime:this.end}).then(()=>{
+    axios.post('https://8080-dalyhachich-timetracker-0hek2vxdhl9.ws-eu64.gitpod.io/api/timers',{startTime:this.start,endTime:this.end}).then(()=>{
       location.reload(true)
     })
   }

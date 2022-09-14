@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = "postgresql://postgres:daly@localhost:5432/timer"
+  url      = env("DATABASE_URL")
 }
 
 model timer {
