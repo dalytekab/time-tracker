@@ -8,6 +8,7 @@ COPY . .
 RUN npx prisma generate --schema=./src/prisma/schema.prisma
 
 
+# FE
 FROM node:16.17.0 as build-client
 WORKDIR /app
 COPY ././timetracker-frontend/package.json ./
@@ -22,5 +23,8 @@ FROM node:16.17.0 as builder
 WORKDIR /app
 ADD . .
 COPY --from=dependencies /app/node_modules/ /app/node_modules/
-#COPY --from=build-client /app/dist/ /app/fo_client/dist/
-CMD ["npm", "run", "start:migrate"]
+COPY --from=build-client /app/dist/ /app/fo_client/dist/
+CMD ["npm", "run", "start:migrate:prod"]
+
+
+
