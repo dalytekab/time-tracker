@@ -1,7 +1,7 @@
 # Install node dependencies 
 FROM node:16.17.0 as dependencies
 WORKDIR /app
-COPY package.json ./
+COPY ././package.json ./
 RUN npm install
 COPY . .
 #RUN ls -la /app/node_modules/
@@ -11,13 +11,12 @@ RUN npx prisma generate --schema=./src/prisma/schema.prisma
 # FE
 FROM node:16.17.0 as build-client
 WORKDIR /app
-COPY /timetracker-frontend/package.json ./
-COPY /timetracker-frontend/package-lock.json ./
+COPY ././timetracker-frontend/package.json ./
+COPY ././timetracker-frontend/package-lock.json ./
 RUN npm install
-COPY /timetracker-frontend/. .
+COPY ././timetracker-frontend/. .
 ARG VUE_APP_DATABASE_URL=$API
-CMD npm run build
-
+RUN npm run build
 
 # RUN
 FROM node:16.17.0 as builder
