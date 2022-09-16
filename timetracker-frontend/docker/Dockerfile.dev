@@ -6,8 +6,8 @@ RUN npm install
 COPY . .
 #RUN ls -la /app/node_modules/
 #RUN npx prisma generate --schema=./src/prisma/schema.prisma
-ARG VUE_APP_DATABASE_URL=$API
-RUN npm run build
+#ARG VUE_APP_DATABASE_URL=$API
+#RUN npm run build
 
 
 FROM node:16.17.0 as builder
