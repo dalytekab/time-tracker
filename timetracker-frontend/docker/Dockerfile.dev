@@ -1,9 +1,10 @@
 # Install node dependencies 
 FROM node:16.17.0 as dependencies
 WORKDIR /app
-COPY ./package.json ./
+COPY ./package*.json ./
 RUN npm install
-COPY . .
+
+
 
 FROM node:16.17.0 as builder
 WORKDIR /app

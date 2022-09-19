@@ -7,8 +7,6 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: daly
       POSTGRES_DB: timer
-    ports:
-      - 5432:5432
     volumes:
       - ./pgdata:/var/lib/postgresql/data
     networks:
@@ -18,8 +16,6 @@ services:
     profiles: ["dev"]
     build: 
       context: .
-      #args:
-      #  API: $$(gp url 8080)
     depends_on:
       - db
     networks:
@@ -32,8 +28,6 @@ services:
     command: npm run start:migrate:prod
     build: 
       context: .
-     # args:
-     #   API: $$(gp url 8080)
     depends_on:
       - db
     networks:
@@ -48,9 +42,9 @@ services:
       context: ./timetracker-frontend/
       dockerfile: docker/Dockerfile.prod
       args:
-        API: $$(gp url 3000)
+        VUE_APP_API_URL: ${API_URL}
     ports:
-      - "8000:8000"
+      - "8000:80"
     networks:
       - node_network
 
@@ -58,8 +52,6 @@ services:
     container_name: frontdev
     profiles: ["dev"]
     tty: true
-    env_file:
-     - ./timetracker-frontend/.env
     environment:
       - VUE_APP_API_URL=${API_URL}
     build:
