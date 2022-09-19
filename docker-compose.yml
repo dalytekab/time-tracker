@@ -20,6 +20,8 @@ services:
       - db
     networks:
       - node_network
+    volumes:
+      - ./src/:/app/src:cached
     ports:
       - "3000:3000"
 
