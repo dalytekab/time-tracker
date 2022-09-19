@@ -59,7 +59,7 @@ services:
     profiles: ["dev"]
     tty: true
     env_file:
-     - .timetracker-frontend/.env
+     - /timetracker-frontend/.env
     environment:
       - VUE_APP_API_URL=${API_URL}
     build:
