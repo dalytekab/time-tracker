@@ -15,13 +15,13 @@ services:
   api-dev:
     profiles: ["dev"]
     build: 
-      context: .
+      context: ./backend/
     depends_on:
       - db
     networks:
       - node_network
     volumes:
-      - ./src/:/app/src:cached
+      - ./backend/src/:/app/src:cached
     ports:
       - "3000:3000"
 
@@ -29,7 +29,7 @@ services:
     profiles: ["prod"]
     command: npm run start:migrate:prod
     build: 
-      context: .
+      context: ./backend/
     depends_on:
       - db
     networks:
