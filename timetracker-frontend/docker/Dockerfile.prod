@@ -4,7 +4,6 @@ WORKDIR /app
 COPY ./package.json ./
 RUN npm install
 COPY . .
-#RUN npx prisma generate --schema=./src/prisma/schema.prisma
 ARG VUE_APP_DATABASE_URL=$API
 RUN npm run build
 
@@ -15,15 +14,6 @@ COPY --from=dependencies-build /app/dist /usr/share/nginx/html
 EXPOSE 8000
 CMD ["nginx", "-g", "daemon off;"]
 
-# FE
-#FROM node:16.17.0 as build-client
-#WORKDIR /app
-#COPY ./package.json ./
-#COPY ./package.json ./
-#RUN npm install
-#COPY . .
-#ARG VUE_APP_DATABASE_URL=$API
-#CMD npm run build
 
 
 

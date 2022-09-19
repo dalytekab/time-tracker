@@ -4,9 +4,7 @@ WORKDIR /app
 COPY ././package.json ./
 RUN npm install
 COPY . .
-#RUN ls -la /app/node_modules/
 RUN npx prisma generate --schema=./src/prisma/schema.prisma
-RUN npm run build
 
 
 # RUN

@@ -14,12 +14,12 @@ services:
     networks:
       - node_network
 
-
   api-dev:
     profiles: ["dev"]
     build: 
-      args:
-        API: $$(gp url 8080)
+      context: .
+      #args:
+      #  API: $$(gp url 8080)
     depends_on:
       - db
     networks:
@@ -31,14 +31,45 @@ services:
     profiles: ["prod"]
     command: npm run start:migrate:prod
     build: 
-      args:
-        API: $$(gp url 8080)
+      context: .
+     # args:
+     #   API: $$(gp url 8080)
     depends_on:
       - db
     networks:
       - node_network
     ports:
       - "3000:3000"
+
+  app-prod:
+    container_name: frontprod
+    profiles: ["prod"]
+    build:
+      context: ./timetracker-frontend/
+      dockerfile: docker/Dockerfile.prod
+      args:
+        API: $$(gp url 3000)
+    ports:
+      - "8000:8000"
+    networks:
+      - node_network
+
+  app-dev:
+    container_name: frontdev
+    profiles: ["dev"]
+    tty: true
+    environment:
+      - VUE_APP_API_URL=${API_URL}
+    build:
+      context: ./timetracker-frontend/
+      dockerfile: docker/Dockerfile.dev
+    volumes:
+      - ./timetracker-frontend/src/:/app/src:cached
+    ports:
+      - "8080:8080"
+    networks:
+      - node_network
+
 
 networks:
   node_network:

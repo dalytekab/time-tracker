@@ -82,7 +82,7 @@ beforeMount(){
 },
 methods: {
   async getData(){
-  let res = await axios.get(process.env.VUE_APP_DATABASE_URL+'/api/timers')
+  let res = await axios.get(process.env.VUE_APP_API_URL+'/api/timers')
   let data = res.data
   data.forEach(element => {
     
@@ -123,7 +123,7 @@ arreter()
   {
     this.$refs.courant.pause();
     this.end=new Date();
-    axios.post(process.env.VUE_APP_DATABASE_URL+'/api/timers',{startTime:this.start,endTime:this.end}).then(()=>{
+    axios.post(process.env.VUE_APP_API_URL+'/api/timers',{startTime:this.start,endTime:this.end}).then(()=>{
       location.reload(true)
     })
   }
