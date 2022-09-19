@@ -8,9 +8,8 @@ tasks:
   # noticed no change
   # echo "API_URL=$(gp url 3000)" >> /timetracker-frontend/.env
   #  API_URL=$(gp url 3000) ./generate-open-api.sh
-  - init: docker-compose --profile dev build
+  - init: export API_URL=$(gp url 3000) && docker-compose --profile dev build
     command: |
-      gp env API_URL=$(gp url 3000)
       docker-compose --profile dev up -d
 
 
