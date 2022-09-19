@@ -4,10 +4,13 @@
 
 tasks:
   # TODO: replace init with docker compose build and command with docker compose up
+
+  # noticed no change
+  # echo "API_URL=$(gp url 3000)" >> /timetracker-frontend/.env
+  #  API_URL=$(gp url 3000) ./generate-open-api.sh
   - init: docker-compose --profile dev build
     command: |
-      echo "API_URL=$(gp url 3000)" >> /timetracker-frontend/.env
-      API_URL=$(gp url 3000) ./generate-open-api.sh
+      gp env API_URL=$(gp url 3000)
       docker-compose --profile dev up -d
 
 

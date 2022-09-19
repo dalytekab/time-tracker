@@ -58,6 +58,8 @@ services:
     container_name: frontdev
     profiles: ["dev"]
     tty: true
+    env_file:
+     - .timetracker-frontend/.env
     environment:
       - VUE_APP_API_URL=${API_URL}
     build:
